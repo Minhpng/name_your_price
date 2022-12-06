@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../models/location.dart';
 import 'image_banner.dart';
 import 'text_section.dart';
 
@@ -8,18 +9,22 @@ class LocationDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locations = Location.fetchAll();
+    final location = locations.first;
+    textSections(location);
     return Scaffold(
-      appBar: AppBar(title: const Text('Location Detail')),
+      appBar: AppBar(title: Text(location.name)),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ImageBanner("assets/images/m_m.jpg"),
-          TextSection(Colors.red),
-          TextSection(Colors.green),
-          TextSection(Colors.blue),
-        ],
+        children: [ImageBanner(location.imagePath), ...textSections(location)],
       ),
     );
+  }
+
+  List<Widget> textSections(Location location) {
+    return location.facts
+        .map((fact) => TextSection(fact.title, fact.text))
+        .toList();
   }
 }
