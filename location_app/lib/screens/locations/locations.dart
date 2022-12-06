@@ -5,6 +5,10 @@ import '../../models/location.dart';
 class Locations extends StatelessWidget {
   const Locations({Key? key}) : super(key: key);
 
+  void _onLocationTap() {
+    print(this);
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Location> locations = Location.fetchAll();
