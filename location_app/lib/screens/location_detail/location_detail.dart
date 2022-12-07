@@ -5,15 +5,14 @@ import 'image_banner.dart';
 import 'text_section.dart';
 
 class LocationDetail extends StatelessWidget {
-  const LocationDetail({Key? key}) : super(key: key);
+  final int _locationID;
+  const LocationDetail(this._locationID, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final locations = Location.fetchAll();
-    final location = locations.first;
-    textSections(location);
+    final location = Location.fetchByID(_locationID);
     return Scaffold(
-      appBar: AppBar(title: Text(location.name)),
+      appBar: AppBar(title: Text(location!.name)),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
