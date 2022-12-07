@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:location_app/models/location.dart';
 import 'package:location_app/screens/location_detail/location_detail.dart';
 
 import 'screens/locations/locations.dart';
@@ -16,7 +17,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       theme: _theme(),
       initialRoute: '/',
-      onGenerateRoute: _routes(),
+      onGenerateRoute: _route(),
       home: const Locations(),
     );
   }
@@ -35,23 +36,22 @@ class App extends StatelessWidget {
     );
   }
 
-  RouteFactory _routes() {
+  RouteFactory _route() {
     return (settings) {
-      print(settings.arguments);
-      final arguments = settings.arguments as int;
+      final arguments = settings.arguments as ScreenArguments;
       Widget screen;
       switch (settings.name) {
         case LocationsRoute:
-          screen = Locations();
+          screen = const Locations();
           break;
         case LocationDetailRoute:
-          screen = LocationDetail(arguments);
+          screen = LocationDetail(arguments.id);
           break;
         default:
           return null;
       }
 
-      return MaterialPageRoute(builder: (BuildContext context) => screen);
+      return MaterialPageRoute(builder: (context) => screen);
     };
   }
 }

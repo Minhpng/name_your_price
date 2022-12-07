@@ -5,16 +5,16 @@ import '../../models/location.dart';
 
 class ScreenArguments {
   final String title;
-  final dynamic value;
-
-  ScreenArguments(this.title, this.value);
+  final dynamic id;
+  ScreenArguments(this.title, this.id);
 }
 
 class Locations extends StatelessWidget {
   const Locations({Key? key}) : super(key: key);
 
   void _onLocationTap(BuildContext context, int id) {
-    Navigator.pushNamed(context, LocationDetailRoute, arguments: id);
+    Navigator.pushNamed(context, LocationDetailRoute,
+        arguments: ScreenArguments('id', id));
   }
 
   @override

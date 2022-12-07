@@ -10,7 +10,7 @@ class LocationDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final location = Location.fetchByID(_locationID);
+    final Location? location = Location.fetchById(_locationID);
     return Scaffold(
       appBar: AppBar(title: Text(location!.name)),
       body: Column(
