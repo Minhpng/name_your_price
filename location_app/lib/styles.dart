@@ -7,28 +7,26 @@ const LargeTextSize = 26.0;
 const MediumTextSize = 20.0;
 const BodyTextSize = 16.0;
 
-const AppTextFamily = GoogleFonts.montserrat;
+const appFamilyFont = GoogleFonts.montserrat;
 
-TextStyle appBarTextStyle = AppTextFamily(
+final appBarTextStyle = appFamilyFont(
   textStyle: const TextStyle(
-    fontWeight: FontWeight.w300,
     fontSize: LargeTextSize,
+    fontWeight: FontWeight.w300,
     color: Colors.white,
   ),
 );
-
-TextStyle TitleTextStyle = AppTextFamily(
+final titleLargeStyle = appFamilyFont(
   textStyle: const TextStyle(
-    fontWeight: FontWeight.w400,
     fontSize: LargeTextSize,
-    color: Colors.black,
+    fontWeight: FontWeight.w500,
+    color: Colors.black87,
   ),
 );
-
-TextStyle BodyTextStyle = AppTextFamily(
+final bodyTextStyle = appFamilyFont(
   textStyle: const TextStyle(
-    fontWeight: FontWeight.w300,
     fontSize: BodyTextSize,
-    color: Colors.black,
+    fontWeight: FontWeight.w400,
+    color: Colors.black87,
   ),
 );

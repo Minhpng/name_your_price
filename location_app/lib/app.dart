@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:location_app/models/location.dart';
-import 'package:location_app/screens/location_detail/location_detail.dart';
-
-import 'screens/locations/locations.dart';
+import '../screens/location_detail/location_detail.dart';
+import '../screens/locations_homepage/locations_homepage.dart';
 import 'styles.dart';
 
 const LocationsRoute = '/';
@@ -16,41 +14,38 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: _theme(),
-      initialRoute: '/',
+      initialRoute: LocationsRoute,
       onGenerateRoute: _route(),
-      home: const Locations(),
+      home: const LocationsHomePage(),
     );
   }
 
   ThemeData _theme() {
     return ThemeData(
       appBarTheme: AppBarTheme(
-        titleTextStyle: GoogleFonts.montserrat(
-          textStyle: appBarTextStyle.copyWith(color: Colors.white),
-        ),
+        titleTextStyle: appBarTextStyle,
       ),
       textTheme: TextTheme(
-        titleLarge: TitleTextStyle,
-        bodyLarge: BodyTextStyle,
+        titleLarge: titleLargeStyle,
+        bodyMedium: bodyTextStyle,
       ),
     );
   }
 
   RouteFactory _route() {
     return (settings) {
-      final arguments = settings.arguments as ScreenArguments;
+      final arguments = settings.arguments as String;
       Widget screen;
       switch (settings.name) {
         case LocationsRoute:
-          screen = const Locations();
+          screen = const LocationsHomePage();
           break;
         case LocationDetailRoute:
-          screen = LocationDetail(arguments.id);
+          screen = LocationDetail(arguments);
           break;
         default:
           return null;
       }
-
       return MaterialPageRoute(builder: (context) => screen);
     };
   }

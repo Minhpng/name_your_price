@@ -1,29 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:location_app/models/location_facts.dart';
 
-import '../../models/location.dart';
-import 'image_banner.dart';
+import '../../models/get_locations.dart';
+import 'location_image.dart';
 import 'text_section.dart';
 
 class LocationDetail extends StatelessWidget {
-  final int _locationID;
-  const LocationDetail(this._locationID, {Key? key}) : super(key: key);
+  final String locationId;
+  const LocationDetail(this.locationId, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final Location? location = Location.fetchById(_locationID);
+    final location = Location.fetchById(locationId);
     return Scaffold(
-      appBar: AppBar(title: Text(location!.name)),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [ImageBanner(location.imagePath), ...textSections(location)],
+      appBar: AppBar(
+        title: Text(location!.locationName),
       ),
+      body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            LocationImage(location.imageUrl),
+            Column(children: [...LocationBody(location.locationFact)])
+          ]),
     );
   }
 
-  List<Widget> textSections(Location location) {
-    return location.facts
-        .map((fact) => TextSection(fact.title, fact.text))
+  List<Widget> LocationBody(List<LocationFacts> locationFacts) {
+    return locationFacts
+        .map((fact) => TextSection(fact.title, fact.description))
         .toList();
   }
 }
